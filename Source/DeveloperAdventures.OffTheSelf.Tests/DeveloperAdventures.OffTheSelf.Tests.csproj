@@ -4,13 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{49A79676-F10E-4CAF-ACA1-4E2AC9534305}</ProjectGuid>
+    <ProjectGuid>{35FB0871-C08A-4CF9-82A3-BC96FA45535B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DeveloperAdventures.OffTheShelf.Extensions</RootNamespace>
-    <AssemblyName>DeveloperAdventures.OffTheShelf.Extensions</AssemblyName>
+    <RootNamespace>DeveloperAdventures.OffTheSelf.Tests</RootNamespace>
+    <AssemblyName>DeveloperAdventures.OffTheSelf.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +32,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Machine.Fakes">
+      <HintPath>..\packages\Machine.Fakes.1.5.0\lib\net40\Machine.Fakes.dll</HintPath>
+    </Reference>
+    <Reference Include="Machine.Specifications">
+      <HintPath>..\packages\Machine.Specifications.0.5.12\lib\net40\Machine.Specifications.dll</HintPath>
+    </Reference>
+    <Reference Include="Machine.Specifications.Clr4">
+      <HintPath>..\packages\Machine.Specifications.0.5.12\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,15 +53,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DateTimeExtensions.cs" />
-    <Compile Include="EnumerableExtensions.cs" />
-    <Compile Include="EnumerationExtensions.cs" />
-    <Compile Include="NullableExtensions.cs" />
-    <Compile Include="Patterns.cs" />
+    <Compile Include="Encryption\AESCryptoProviderTests.cs" />
+    <Compile Include="Encryption\SHA256CryptoProviderTests.cs" />
+    <Compile Include="Encryption\SHA512CryptoProviderTests.cs" />
+    <Compile Include="Encryption\SHACryptoProviderFactoryTests.cs" />
+    <Compile Include="Extensions\DateTimeExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DeveloperAdventures.OffTheShelf\DeveloperAdventures.OffTheShelf.csproj">
+      <Project>{3e927b99-1329-4726-89ec-d88da1f3eaf7}</Project>
+      <Name>DeveloperAdventures.OffTheShelf</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
