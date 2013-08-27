@@ -4,31 +4,48 @@
  * 
  */
 
-
-using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace DeveloperAdventures.OffTheSelf.Encryption
+namespace DeveloperAdventures.OffTheShelf.Encryption
 {
-    public class AESCryptoProvider : IDisposable
+    using System;
+    using System.IO;
+    using System.Security.Cryptography;
+    using System.Text;
+
+    using DeveloperAdventures.OffTheShelf.Encryption.Interfaces;
+
+    public class AESCryptoProvider : ICryptoProvider
     {
         Rijndael rijndael;
         UTF8Encoding encoding;
 
         public AESCryptoProvider(byte[] key, byte[] vector)
         {
-            encoding = new UTF8Encoding();
-            rijndael = Rijndael.Create();
-            rijndael.Key = key;
-            rijndael.IV = vector;
+            this.encoding = new UTF8Encoding();
+            this.rijndael = Rijndael.Create();
+            this.rijndael.Key = key;
+            this.rijndael.IV = vector;
         }
 
-        public byte[] Encrypt(string valueToEncrypt)
+        public string Decrypt(string text)
         {
-            var bytes = encoding.GetBytes(valueToEncrypt);
-            using (var encryptor = rijndael.CreateEncryptor())
+            using (var decryptor = this.rijndael.CreateDecryptor())
+            using (var stream = new MemoryStream())
+            using (var crypto = new CryptoStream(stream, decryptor, CryptoStreamMode.Write))
+            {
+                var encryptedValue = Convert.FromBase64String(text);
+                crypto.Write(encryptedValue, 0, encryptedValue.Length);
+                crypto.FlushFinalBlock();
+                stream.Position = 0;
+                var decryptedBytes = new Byte[stream.Length];
+                stream.Read(decryptedBytes, 0, decryptedBytes.Length);
+                return this.encoding.GetString(decryptedBytes);
+            }
+        }
+
+        public string Encrypt(string text)
+        {
+            var bytes = this.encoding.GetBytes(text);
+            using (var encryptor = this.rijndael.CreateEncryptor())
             using (var stream = new MemoryStream())
             using (var crypto = new CryptoStream(stream, encryptor, CryptoStreamMode.Write))
             {
@@ -37,30 +54,20 @@ namespace DeveloperAdventures.OffTheSelf.Encryption
                 stream.Position = 0;
                 var encrypted = new byte[stream.Length];
                 stream.Read(encrypted, 0, encrypted.Length);
-                return encrypted;
+                return Convert.ToBase64String(encrypted);
             }
         }
 
-        public string Decrypt(byte[] encryptedValue)
+        public string GetSalt(int size)
         {
-            using (var decryptor = rijndael.CreateDecryptor())
-            using (var stream = new MemoryStream())
-            using (var crypto = new CryptoStream(stream, decryptor, CryptoStreamMode.Write))
-            {
-                crypto.Write(encryptedValue, 0, encryptedValue.Length);
-                crypto.FlushFinalBlock();
-                stream.Position = 0;
-                var decryptedBytes = new Byte[stream.Length];
-                stream.Read(decryptedBytes, 0, decryptedBytes.Length);
-                return encoding.GetString(decryptedBytes);
-            }
+            throw new NotImplementedException();
         }
 
         public void Dispose()
         {
-            if (rijndael != null)
+            if (this.rijndael != null)
             {
-                rijndael.Dispose();
+                this.rijndael.Dispose();
             }
         }
     }

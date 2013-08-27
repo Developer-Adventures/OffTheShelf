@@ -1,36 +1,18 @@
-﻿namespace DeveloperAdventures.OffTheSelf.Encryption
+﻿namespace DeveloperAdventures.OffTheShelf.Encryption
 {
     using System;
     using System.Security.Cryptography;
     using System.Text;
 
-    using DeveloperAdventures.OffTheSelf.Encryption.Interfaces;
+    using DeveloperAdventures.OffTheShelf.Encryption.Interfaces;
 
-    public class SHA256CryptoProvider : ISHACryptoProvider
+    public class SHA256CryptoProvider : ICryptoProvider
     {
-        private RNGCryptoServiceProvider rngProvider;
-        private SHA256 sha256;
-        private UTF8Encoding encoding;
+        #region Public Methods and Operators
 
-        public SHA256CryptoProvider()
+        public string Decrypt(string text)
         {
-            this.sha256 = SHA256.Create();
-            encoding = new UTF8Encoding();
-            rngProvider = new RNGCryptoServiceProvider();
-        }
-
-        public string Encrypt(string text)
-        {
-            byte[] result = sha256.ComputeHash(encoding.GetBytes(text));
-            return Encoding.UTF8.GetString(result);
-        }
-
-        public string GetSalt(int size)
-        {
-            var buffer = new byte[size];
-            rngProvider.GetBytes(buffer);
-
-            return Convert.ToBase64String(buffer);
+            throw new NotImplementedException();
         }
 
         public void Dispose()
@@ -45,5 +27,42 @@
                 this.rngProvider.Dispose();
             }
         }
+
+        public string Encrypt(string text)
+        {
+            byte[] result = this.sha256.ComputeHash(this.encoding.GetBytes(text));
+            return Encoding.UTF8.GetString(result);
+        }
+
+        public string GetSalt(int size)
+        {
+            var buffer = new byte[size];
+            this.rngProvider.GetBytes(buffer);
+
+            return Convert.ToBase64String(buffer);
+        }
+
+        #endregion
+
+        #region Fields
+
+        private readonly UTF8Encoding encoding;
+
+        private readonly RNGCryptoServiceProvider rngProvider;
+
+        private readonly SHA256 sha256;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        public SHA256CryptoProvider()
+        {
+            this.sha256 = SHA256.Create();
+            this.encoding = new UTF8Encoding();
+            this.rngProvider = new RNGCryptoServiceProvider();
+        }
+
+        #endregion
     }
 }

@@ -40,11 +40,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Encryption\AESCryptoProvider.cs" />
-    <Compile Include="Encryption\Interfaces\ISHACryptoProvider.cs" />
-    <Compile Include="Encryption\Interfaces\ISHACryptoProviderFactory.cs" />
+    <Compile Include="Encryption\CryptoProviderType.cs" />
+    <Compile Include="Encryption\CryptoProviderFactory.cs" />
+    <Compile Include="Encryption\Interfaces\ICryptoProvider.cs" />
+    <Compile Include="Encryption\Interfaces\ICryptoProviderFactory.cs" />
     <Compile Include="Encryption\SHA256CryptoProvider.cs" />
     <Compile Include="Encryption\SHA512CryptoProvider.cs" />
-    <Compile Include="Encryption\SHACryptoProviderFactory.cs" />
     <Compile Include="Encryption\SHACryptoStrength.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />

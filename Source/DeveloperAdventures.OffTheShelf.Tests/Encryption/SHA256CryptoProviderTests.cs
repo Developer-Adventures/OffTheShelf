@@ -1,6 +1,6 @@
-﻿namespace DeveloperAdventures.OffTheSelf.Tests.Encryption
+﻿namespace DeveloperAdventures.OffTheShelf.Tests.Encryption
 {
-    using DeveloperAdventures.OffTheSelf.Encryption;
+    using DeveloperAdventures.OffTheShelf.Encryption;
 
     using NUnit.Framework;
 
@@ -12,13 +12,13 @@
         [SetUp]
         public void SetUp()
         {
-            sut = new SHA256CryptoProvider();
+            this.sut = new SHA256CryptoProvider();
         }
 
         [TearDown]
         public void TearDown()
         {
-            sut = null;
+            this.sut = null;
         }
 
         [Test]
@@ -29,8 +29,8 @@
             var size2 = 10;
 
             // Act
-            var salt = sut.GetSalt(size);
-            var salt2 = sut.GetSalt(size2);
+            var salt = this.sut.GetSalt(size);
+            var salt2 = this.sut.GetSalt(size2);
 
             // Assert
             Assert.IsNotNullOrEmpty(salt);
@@ -43,11 +43,11 @@
         {
             // Arrange
             var rawString = "StringToEncrypt";
-            var salt = sut.GetSalt(100);
+            var salt = this.sut.GetSalt(100);
             var saltedString = salt + rawString;
 
             // Act
-            var hashed = sut.Encrypt(saltedString);
+            var hashed = this.sut.Encrypt(saltedString);
 
             // Assert
             Assert.AreNotSame(saltedString, hashed);

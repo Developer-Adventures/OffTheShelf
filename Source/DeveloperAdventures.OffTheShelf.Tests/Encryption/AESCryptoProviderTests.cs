@@ -4,15 +4,17 @@
  * 
  */
 
-namespace DeveloperAdventures.OffTheSelf.Tests.Encryption
+namespace DeveloperAdventures.OffTheShelf.Tests.Encryption
 {
-    using DeveloperAdventures.OffTheSelf.Encryption;
+    using DeveloperAdventures.OffTheShelf.Encryption;
 
     using NUnit.Framework;
 
     [TestFixture]
     public class AESCryptoProviderTests
     {
+        const string RawValue = "StringToEncrypt";
+
         [Test]
         public void CanDecrypt()
         {
@@ -22,9 +24,10 @@ namespace DeveloperAdventures.OffTheSelf.Tests.Encryption
 
             using (var rijndaelHelper = new AESCryptoProvider(key, vector))
             {
-                var encrypt = rijndaelHelper.Encrypt("StringToEncrypt");
+                
+                var encrypt = rijndaelHelper.Encrypt(RawValue);
                 var decrypt = rijndaelHelper.Decrypt(encrypt);
-                Assert.AreEqual("StringToEncrypt", decrypt);
+                Assert.AreEqual(RawValue, decrypt);
             }
         }
 
@@ -37,7 +40,7 @@ namespace DeveloperAdventures.OffTheSelf.Tests.Encryption
 
             using (var rijndaelHelper = new AESCryptoProvider(key, vector))
             {
-                var encrypt = rijndaelHelper.Encrypt("StringToEncrypt");
+                var encrypt = rijndaelHelper.Encrypt(RawValue);
                 Assert.AreNotEqual("StringToEncrypt", encrypt);
             }
         }

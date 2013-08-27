@@ -7,8 +7,8 @@
     <ProjectGuid>{35FB0871-C08A-4CF9-82A3-BC96FA45535B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DeveloperAdventures.OffTheSelf.Tests</RootNamespace>
-    <AssemblyName>DeveloperAdventures.OffTheSelf.Tests</AssemblyName>
+    <RootNamespace>DeveloperAdventures.OffTheShelf.Tests</RootNamespace>
+    <AssemblyName>DeveloperAdventures.OffTheShelf.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -56,7 +56,7 @@
     <Compile Include="Encryption\AESCryptoProviderTests.cs" />
     <Compile Include="Encryption\SHA256CryptoProviderTests.cs" />
     <Compile Include="Encryption\SHA512CryptoProviderTests.cs" />
-    <Compile Include="Encryption\SHACryptoProviderFactoryTests.cs" />
+    <Compile Include="Encryption\CryptoProviderFactoryTests.cs" />
     <Compile Include="Extensions\DateTimeExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
