@@ -9,5 +9,7 @@
         ICryptoProvider GetProvider(CryptoProviderType providerType);
 
         ICryptoProvider GetProvider(CryptoProviderType providerType, SHACryptoStrength strength);
+
+        ICryptoProvider GetProvider(byte[] key, byte[] iv);
     }
 }

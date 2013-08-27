@@ -63,6 +63,11 @@
             return new AESCryptoProvider(this.key, this.iv);
         }
 
+        public ICryptoProvider GetProvider(byte[] key, byte[] iv)
+        {
+            return new AESCryptoProvider(key, iv);
+        }
+
         #endregion
 
         #region Fields
