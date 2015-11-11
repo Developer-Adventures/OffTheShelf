@@ -3,6 +3,7 @@
     public enum CryptoProviderType
     {
         AES,
+        AESRDM,
         SHA
     }
 } 

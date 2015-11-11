@@ -42,6 +42,7 @@
     <Compile Include="Encryption\AESCryptoProvider.cs" />
     <Compile Include="Encryption\CryptoProviderType.cs" />
     <Compile Include="Encryption\CryptoProviderFactory.cs" />
+    <Compile Include="Encryption\AESRandomCryptoProvider.cs" />
     <Compile Include="Encryption\Interfaces\ICryptoProvider.cs" />
     <Compile Include="Encryption\Interfaces\ICryptoProviderFactory.cs" />
     <Compile Include="Encryption\SHA256CryptoProvider.cs" />

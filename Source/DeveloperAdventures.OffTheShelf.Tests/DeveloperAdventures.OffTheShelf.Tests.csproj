@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Encryption\AESRandomCryptoProviderTests.cs" />
     <Compile Include="Encryption\AESCryptoProviderTests.cs" />
     <Compile Include="Encryption\SHA256CryptoProviderTests.cs" />
     <Compile Include="Encryption\SHA512CryptoProviderTests.cs" />

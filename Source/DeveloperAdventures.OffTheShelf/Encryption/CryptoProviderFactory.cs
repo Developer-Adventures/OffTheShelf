@@ -1,4 +1,6 @@
-﻿namespace DeveloperAdventures.OffTheShelf.Encryption
+﻿using System;
+
+namespace DeveloperAdventures.OffTheShelf.Encryption
 {
     using DeveloperAdventures.OffTheSelf.Encryption;
     using DeveloperAdventures.OffTheShelf.Encryption.Interfaces;
@@ -49,6 +51,10 @@
                 {
                     return new AESCryptoProvider(this.key, this.iv);
                 }
+                case CryptoProviderType.AESRDM:
+                {
+                    return new AESRandomCryptoProvider(Convert.ToBase64String(this.key));
+                }
                 case CryptoProviderType.SHA:
                 {
                     if (strength == SHACryptoStrength.SHA256)
@@ -66,6 +72,11 @@
         public ICryptoProvider GetProvider(byte[] key, byte[] iv)
         {
             return new AESCryptoProvider(key, iv);
+        }
+
+        public ICryptoProvider GetProvider(string key)
+        {
+            return new AESRandomCryptoProvider(key);
         }
 
         #endregion
