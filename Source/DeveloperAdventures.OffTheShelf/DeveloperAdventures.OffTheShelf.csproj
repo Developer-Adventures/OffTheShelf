@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreditCard\CreditCardLogic.cs" />
     <Compile Include="Encryption\AESCryptoProvider.cs" />
     <Compile Include="Encryption\CryptoProviderType.cs" />
     <Compile Include="Encryption\CryptoProviderFactory.cs" />
